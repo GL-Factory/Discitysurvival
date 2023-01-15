@@ -1,5 +1,5 @@
 const { Client, GatewayIntentBits } = require("discord.js");
-const { TOKEN_LOGIN } = require("./apikey.js");
+const { token } = require('./config.json');
 const {SlashCommandBuilder } = require("@discordjs/builders");
 
 const client = new Client({
@@ -88,4 +88,4 @@ client.on("messageCreate", message => {
     }
 })
 
-client.login(TOKEN_LOGIN) //connexion du bot à l'api discord
+client.login(token) //connexion du bot à l'api discord
