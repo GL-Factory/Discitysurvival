@@ -1,7 +1,8 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
-const { token, clientId, guildId } = require('./config.json');
+
+const { Client, Collection, GatewayIntentBits } = require('discord.js');
+const { token } = require('./config.json');
 
 const client = new Client({
     intents: [
@@ -29,34 +30,21 @@ for (const file of commandFiles) {
 	}
 }
 
+// similaiore aux commands pour  gérer les events : 
+const eventsPath = path.join(__dirname, 'events');
+const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
 
-client.once(Events.ClientReady, c => {
-
-	console.log('Ready! Logged in as ' + c.user.tag);
-});
-
-//listener command
-client.on(Events.InteractionCreate, async interaction => {
-	if (!interaction.isChatInputCommand()) return;
-
-	const command = interaction.client.commands.get(interaction.commandName);
-
-	if (!command) {
-		console.error(`No command matching ${interaction.commandName} was found.`);
-		return;
+for (const file of eventFiles) {
+	const filePath = path.join(eventsPath, file);
+	const event = require(filePath);
+	if (event.once) {
+		client.once(event.name, (...args) => event.execute(...args));
+	} else {
+		client.on(event.name, (...args) => event.execute(...args));
 	}
+}
 
-	try {
-		await command.execute(interaction);
-	} catch (error) {
-		console.error(error);
-		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
-	}
-})
-//
-
-
-//simples intércations avec la lecture d'un message
+//simples intércations avec la lecture d'un message, mais préférer les commandes si envie de créer une action spécifique on demands
 client.on("messageCreate", message => {
 
     if(message.author.bot) 
@@ -84,6 +72,7 @@ client.on("messageCreate", message => {
       message.reply("ET PAN UNE CLAQUETTE DANS LA TÊTE DE <@147059697776590848>"); //pauvre Draeky
     }
 })
+
 
 
 client.login(token)
