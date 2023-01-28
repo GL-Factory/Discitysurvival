@@ -12,8 +12,6 @@ const client = new Client({
     ]
 });
 
-
-
 client.commands = new Collection(); //pour accès dans un autre fichier si besoin
 
 const commandsPath = path.join(__dirname, 'commands');
