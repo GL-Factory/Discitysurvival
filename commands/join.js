@@ -11,9 +11,6 @@ module.exports = {
                 let user = interaction.user ;
                 let nameCity = "POUETLAND";
 
-                console.log(global_storage);
-                console.log(global_storage['player_list']);
-                console.log(user);
                 try{
                     if(global_storage['player_list'][user] === undefined){
                         global_storage['player_list'][user] =  {
