@@ -8,18 +8,14 @@ module.exports = {
 	async execute(interaction) {
         if(interaction.isCommand()){
             if(interaction.commandName === "join"){
-                let user = interaction.targetUser ;
+                let user = interaction.user ;
                 let nameCity = "POUETLAND";
 
                 console.log(global_storage);
                 console.log(global_storage['player_list']);
+                console.log(user);
                 try{
-                    if(Object.keys(global_storage['player_list']).includes(user)){
-                        await interaction.reply("Vous avez déjà rejoint la magnifique ville de `{nameCity}`"); 
-                    }
-
-                    else {
-                        //TODO bloc logique pour la création de ville et d'ajout du joueur dans la ville #version1
+                    if(global_storage['player_list'][user] === undefined){
                         global_storage['player_list'][user] =  {
                             "localisation" : "in",
                             "inventory": {
@@ -36,7 +32,9 @@ module.exports = {
                         }
                     
                         //message à afficher au joueur si tout se passe bien
-                        await interaction.reply("Vous avez rejoint la magnifique ville de `{nameCity}");
+                        await interaction.reply(`Vous avez rejoint la magnifique ville de ${nameCity}`);
+                    }else {
+                        await interaction.reply(`Vous avez déjà rejoint la magnifique ville de ${nameCity}`); 
                     }
                 
                 
