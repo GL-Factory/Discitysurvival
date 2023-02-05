@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js');
-let global_storage = require('../models/varGlobales.js');
+let global_storage = require('../models/globals.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
