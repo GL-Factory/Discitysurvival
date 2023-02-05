@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('discord.js');
-let global_storage = require('../models/globals.js');
+let city = require('../models/city.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -12,26 +12,13 @@ module.exports = {
                 let nameCity = "POUETLAND";
 
                 try{
-                    if(global_storage['player_list'][user] === undefined){
-                        global_storage['player_list'][user] =  {
-                            "localisation" : "in",
-                            "inventory": {
-                                "water" : 0,
-                                "food" : 0,
-                                "kit" : 0,
-                                "wood" : 0,
-                                "rock" : 0
-                            },
-                            "state": {
-                                "hunger": 0, // 0 Sustenté / 1 Acceptable / 2 Affamé / 3 Mort
-                                "thirst": 0 // 0 Hydraté / 1 Acceptable / 2 Déshydraté / 3 Mort
-                            }
-                        }
+                    if(not(city.isEnrolled(user))){
+                        city.enrollNewPlayer(user)
                     
                         //message à afficher au joueur si tout se passe bien
-                        await interaction.reply(`Vous avez rejoint la magnifique ville de ${nameCity}`);
+                        await interaction.reply(`Bienvenue ${user}, vous avez rejoint la magnifique ville de ${nameCity}`);
                     }else {
-                        await interaction.reply(`Vous avez déjà rejoint la magnifique ville de ${nameCity}`); 
+                        await interaction.reply(`Rebonjour ${user}. Vous avez déjà rejoint la magnifique ville de ${nameCity}`); 
                     }
                 
                 
