@@ -10,7 +10,6 @@ module.exports = {
         if(interaction.isCommand()){
             if(interaction.commandName === "explore"){ 
                 let user = interaction.user;
-                //let user = interaction.targetUser;
                 console.log("Utilisateur : " + user.username + " pars en exploration");
                 let random = Math.floor(Math.random() * 101);
                 console.log("Nombre aléatoire généré pour l'utilisateur " + user.username + " est :" + random);
