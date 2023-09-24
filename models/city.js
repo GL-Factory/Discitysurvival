@@ -27,9 +27,10 @@ function enrollNewPlayer(username){
         }, 
         "location": "city" // city / wild for now
     }
+    console.log(state);
 }
 function isEnrolled(username){
-    return Object.keys(global_storage['player_list']).includes(username)
+    return Object.keys(state['player_list']).includes(username)
 }
 
 module.exports = { state, enrollNewPlayer, isEnrolled }
