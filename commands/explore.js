@@ -24,13 +24,6 @@ module.exports = {
                 } else if (random > 75 && random <=100) {
                     await interaction.reply({ content: 'Vous êtes tombé dans un piège', ephemeral: true });
                 }
-                // 10% chance rien trouver
-                // 20% chance trouver resources
-                // 20% chance trouver ration
-                // 25% chance Monstre et bagarre
-                // 25% chance de tomber dans un piège
-
-
             } else {
                 interaction.reply({ content: 'Une erreur etrange c\'est glissée ici', ephemeral: true});
             }
