@@ -17,7 +17,6 @@ module.exports = {
                         //message à afficher au joueur si tout se passe bien
                         await interaction.reply(`Bienvenue ${user}, vous avez rejoint la magnifique ville de ${nameCity}`);
                     }else {
-                        console.log("else join");
                         await interaction.reply(`Rebonjour ${user}. Vous avez déjà rejoint la magnifique ville de ${nameCity}`); 
                     }
                 }catch(error){

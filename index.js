@@ -28,7 +28,7 @@ for (const file of commandFiles) {
 	}
 }
 
-// similaiore aux commands pour  gérer les events : 
+// similaire aux commands pour  gérer les events : 
 const eventsPath = path.join(__dirname, 'events');
 const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
 
