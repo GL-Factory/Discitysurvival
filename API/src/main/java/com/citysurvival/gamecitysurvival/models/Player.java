@@ -13,9 +13,9 @@ public class Player {
     private Inventory playerInventory;
     private Locations location;
 
-    public Player (String name) {
+    public Player(String name) {
         this.name = name;
-        this.playerInventory = new Inventory(0,0,0,0,0);
+        this.playerInventory = new Inventory(0, 0, 0, 0, 0);
         this.location = Locations.IN;
     }
 

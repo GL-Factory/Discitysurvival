@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -17,16 +16,15 @@ public class City {
     private Inventory cityInventory;
 
 
-
     public void enrollNewPlayer(String playerName) {
-        if(!this.isEnrolledPlayer(playerName)) {
+        if (!this.isEnrolledPlayer(playerName)) {
             Player newPlayer = new Player(playerName);
             playerList.add(newPlayer);
         }
     }
 
     private boolean isEnrolledPlayer(String playerName) {
-       return playerList.stream().anyMatch(player -> player.getName().equals(playerName));
+        return playerList.stream().anyMatch(player -> player.getName().equals(playerName));
     }
 
     private Player getEnrolledPlayer(String playerName) {
@@ -37,7 +35,7 @@ public class City {
     }
 
     public void leaveCityFor(String playerName) {
-        if(isEnrolledPlayer(playerName)) {
+        if (isEnrolledPlayer(playerName)) {
             Player p = getEnrolledPlayer(playerName);
             p.getOut();
         }
