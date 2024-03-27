@@ -28,7 +28,7 @@ for (const file of commandFiles) {
 	}
 }
 
-// similaiore aux commands pour  gérer les events : 
+// similaire aux commands pour  gérer les events : 
 const eventsPath = path.join(__dirname, 'events');
 const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
 
@@ -48,26 +48,9 @@ client.on("messageCreate", message => {
     if(message.author.bot) 
         return;
 
-    if(message.content==="Marco"){
-
-        message.reply("Polo"); //methode 1
-    }
-    if(message.content==="ping"){
-        
-        message.channel.send("pong"); //methode 2
-    }
-
     if(message.content === "help"){
         message.reply("Liste des commandes bots : \n");
         //TODO boucle sur les différentes commandes, à orga quelque part pour que ça soit pas à la main, tableau de correspondance des commandes à une fonction ? 
-    }
-
-    if( message.content === "mention"){
-        message.reply("Mention du user : <@"+message.author.id + "> \n Mention d'un salon : <#" + message.channel.id + ">" );
-    }
-
-    if(message.content === "pan"){
-      message.reply("ET PAN UNE CLAQUETTE DANS LA TÊTE DE <@147059697776590848>"); //pauvre Draeky
     }
 })
 
