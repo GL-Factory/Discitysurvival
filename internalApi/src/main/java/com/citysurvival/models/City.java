@@ -23,8 +23,13 @@ public class City {
     @JoinColumn(name = "inventory_id")
     private Inventory inventory;
 
-    @OneToMany(mappedBy="id")
+    @OneToMany(mappedBy="city")
     private Set<Player> players;
+
+    @ManyToOne
+    @JoinColumn(name="world_id", nullable=false)
+    public World world;
+
 
     @Override
     public boolean equals(Object o) {

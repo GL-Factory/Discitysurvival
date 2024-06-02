@@ -18,7 +18,7 @@ public class World {
 
     private String name;
 
-    @OneToMany(mappedBy="id")
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="world")
     private Set<City> cities;
 
 

@@ -21,6 +21,10 @@ public class Player {
     @JoinColumn(name = "inventory_id")
     private Inventory inventory;
 
+    @ManyToOne
+    @JoinColumn(name="city_id", nullable=false)
+    private City city;
+
     private String location;
 
 }

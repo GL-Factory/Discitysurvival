@@ -1,5 +1,6 @@
 package com.citysurvival.restController;
 
+import com.citysurvival.controller.CityController;
 import com.citysurvival.controller.WorldController;
 import com.citysurvival.dto.CityDto;
 import com.citysurvival.models.City;
@@ -19,6 +20,9 @@ public class WorldRestController {
     @Autowired
     private WorldController worldController;
 
+    @Autowired
+    private CityController cityController;
+
 
     @PostMapping("/city/register")
     public ResponseEntity<?> registerCity(@RequestBody CityDto cityDto){
@@ -26,9 +30,7 @@ public class WorldRestController {
             cityToAdd.setName(cityDto.getCityName());
             worldController.addCityToWorld(cityToAdd);
             return ResponseEntity.ok().build();
-
     }
-
 
     @PostMapping("/city/list")
     public ResponseEntity<?> listCities(@RequestBody String worldName){

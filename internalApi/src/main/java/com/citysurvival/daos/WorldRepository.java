@@ -1,13 +1,15 @@
 package com.citysurvival.daos;
 
 import com.citysurvival.models.World;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
-public interface WorldRepository extends CrudRepository<World, Integer> {
+public interface WorldRepository extends JpaRepository<World, Integer> {
 
 
-    World findByName(String worldName);
+    List<World> findByName(String worldName);
 
 }

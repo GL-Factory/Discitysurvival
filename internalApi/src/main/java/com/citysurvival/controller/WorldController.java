@@ -36,6 +36,8 @@ public class WorldController {
 
             Set<City> firstWorldCities = firstWorld.getCities();
 
+            cityToAdd.setWorld(firstWorld);
+
             firstWorldCities.add(cityToAdd);
 
             firstWorld.setCities(firstWorldCities);
@@ -45,10 +47,9 @@ public class WorldController {
     }
 
     public List<String> getAllCitiesForWorld(String worldName){
-        World foundWorld = worldRepository.findByName(worldName);
-
+        List<World> foundWorld = worldRepository.findByName(worldName);
         if(foundWorld != null) {
-            return foundWorld.getCities().stream().map(City::getName).toList();
+            return foundWorld.get(0).getCities().stream().map(City::getName).toList();
         } else {
             return new ArrayList<>();
         }
