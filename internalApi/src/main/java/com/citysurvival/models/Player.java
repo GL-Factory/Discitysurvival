@@ -15,7 +15,10 @@ public class Player {
     @GeneratedValue
     private int id;
 
-    private String name;
+    @Column(unique = true)
+    private String discordName;
+
+    private String displayName;
 
     @OneToOne
     @JoinColumn(name = "inventory_id")

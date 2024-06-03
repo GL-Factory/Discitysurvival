@@ -23,7 +23,7 @@ public class City {
     @JoinColumn(name = "inventory_id")
     private Inventory inventory;
 
-    @OneToMany(mappedBy="city")
+    @OneToMany(cascade=CascadeType.ALL, mappedBy="city")
     private Set<Player> players;
 
     @ManyToOne

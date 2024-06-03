@@ -3,6 +3,6 @@ package com.citysurvival.dto;
 import lombok.Data;
 
 @Data
-public class CityDto {
+public class CityCreateDto {
     private String cityName;
 }
