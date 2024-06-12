@@ -1,24 +1,23 @@
-package com.citysurvival.controller;
+package com.citysurvival.services;
 
 import com.citysurvival.daos.PlayerRepository;
 import com.citysurvival.exception.PlayerAlreadyAtLocationException;
 import com.citysurvival.exception.PlayerAlreadyExistException;
 import com.citysurvival.models.Player;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.Objects;
 
-@Controller
-public class PlayerController {
+@Service
+public class PlayerService {
 
     @Autowired
     PlayerRepository playerRepository;
 
 
-
-    public Player makePlayerLeaveCity(String discordName){
+    public Player makePlayerLeaveCity(String discordName) {
         return switchLocation(discordName, Locations.OUT_OF_TOWN);
     }
 
@@ -28,8 +27,8 @@ public class PlayerController {
 
     private Player switchLocation(String discordName, Locations desiredLocation) {
         Player foundPlayer = playerRepository.findByDiscordName(discordName);
-        if(foundPlayer != null) {
-            if(Objects.equals(foundPlayer.getLocation(), desiredLocation.getName())){
+        if (foundPlayer != null) {
+            if (Objects.equals(foundPlayer.getLocation(), desiredLocation.getName())) {
                 Locations otherLocation = Arrays.stream(Locations.values())
                         .filter(d -> d != desiredLocation)
                         .findFirst().get();
@@ -44,5 +43,7 @@ public class PlayerController {
         }
     }
 
+
+    
 
 }

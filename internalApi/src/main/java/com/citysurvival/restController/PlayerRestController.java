@@ -1,6 +1,6 @@
 package com.citysurvival.restController;
 
-import com.citysurvival.controller.PlayerController;
+import com.citysurvival.services.PlayerService;
 import com.citysurvival.exception.PlayerAlreadyExistException;
 import com.citysurvival.models.Player;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class PlayerRestController {
 
     @Autowired
-    private PlayerController playerController;
+    private PlayerService playerController;
 
 
     @PostMapping("/leaveCity")

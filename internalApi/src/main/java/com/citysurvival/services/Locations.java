@@ -1,4 +1,4 @@
-package com.citysurvival.controller;
+package com.citysurvival.services;
 
 public enum Locations {
     IN_TOWN("In Town"),

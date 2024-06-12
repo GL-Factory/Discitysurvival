@@ -1,4 +1,4 @@
-package com.citysurvival.controller;
+package com.citysurvival.services;
 
 import com.citysurvival.daos.CityRepository;
 import com.citysurvival.daos.InventoryRepository;
@@ -12,15 +12,15 @@ import com.citysurvival.models.Inventory;
 import com.citysurvival.models.Player;
 import com.citysurvival.models.World;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-@Controller
-public class WorldController {
+@Service
+public class WorldService {
 
 
     @Autowired

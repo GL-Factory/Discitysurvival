@@ -1,6 +1,6 @@
 package com.citysurvival.restController;
 
-import com.citysurvival.controller.WorldController;
+import com.citysurvival.services.WorldService;
 import com.citysurvival.dto.CityCreateDto;
 import com.citysurvival.dto.PlayerRegisterDto;
 import com.citysurvival.exception.CityNotFoundForWorldException;
@@ -22,7 +22,7 @@ import java.util.List;
 public class WorldRestController {
 
     @Autowired
-    private WorldController worldController;
+    private WorldService worldController;
 
 
     @PostMapping("/city/register")
