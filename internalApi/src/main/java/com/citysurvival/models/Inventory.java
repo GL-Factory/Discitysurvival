@@ -25,4 +25,6 @@ public class Inventory {
 
     private int wood;
 
+    private int rock;
+
 }

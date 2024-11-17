@@ -1,5 +1,7 @@
 package com.citysurvival.restController;
 
+import com.citysurvival.exception.PlayerAlreadyAtLocationException;
+import com.citysurvival.exception.PlayerNotFoundException;
 import com.citysurvival.services.PlayerService;
 import com.citysurvival.exception.PlayerAlreadyExistException;
 import com.citysurvival.models.Player;
@@ -24,10 +26,9 @@ public class PlayerRestController {
         try {
             Player moovedPlayer = playerController.makePlayerLeaveCity(playerDiscordName);
             return ResponseEntity.ok().body(String.format("Player %s is now at location %s", playerDiscordName, moovedPlayer.getLocation()));
-        } catch (PlayerAlreadyExistException exception) {
+        } catch (PlayerAlreadyAtLocationException | PlayerNotFoundException exception) {
             return ResponseEntity.badRequest().body(exception.getMessage());
         }
-
     }
 
     @PostMapping("/enterCity")
@@ -36,7 +37,7 @@ public class PlayerRestController {
         try {
             Player moovedPlayer = playerController.makePlayerGoBackToCity(playerDiscordName);
             return ResponseEntity.ok().body(String.format("Player %s is now at location %s", playerDiscordName, moovedPlayer.getLocation()));
-        } catch (PlayerAlreadyExistException exception) {
+        } catch (PlayerAlreadyAtLocationException | PlayerNotFoundException exception) {
             return ResponseEntity.badRequest().body(exception.getMessage());
         }
     }
