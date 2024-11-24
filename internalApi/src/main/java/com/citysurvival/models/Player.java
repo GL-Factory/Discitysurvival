@@ -30,4 +30,11 @@ public class Player {
 
     private String location;
 
+    private int maxEnergy;
+
+    private int currentEnergy;
+
+    private boolean hasDrink;
+
+    private boolean hasEaten;
 }

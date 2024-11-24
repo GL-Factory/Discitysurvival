@@ -1,5 +1,6 @@
 package com.citysurvival.services;
 
+import com.citysurvival.configProperty.PlayerConfigProperty;
 import com.citysurvival.daos.CityRepository;
 import com.citysurvival.daos.InventoryRepository;
 import com.citysurvival.daos.PlayerRepository;
@@ -34,6 +35,9 @@ public class WorldService {
 
     @Autowired
     InventoryRepository inventoryRepository;
+
+    @Autowired
+    private PlayerConfigProperty playerConfigProperty;
 
     public void initNewWorld() {
         if (!worldRepository.existsById(1)) {
@@ -90,6 +94,10 @@ public class WorldService {
             playerInventory = inventoryRepository.save(playerInventory);
             newPlayer.setInventory(playerInventory);
             newPlayer.setLocation("In Town");
+            newPlayer.setMaxEnergy(playerConfigProperty.getBaseEnergy());
+            newPlayer.setCurrentEnergy(playerConfigProperty.getBaseEnergy());
+            newPlayer.setHasDrink(false);
+            newPlayer.setHasEaten(false);
             playerRepository.save(newPlayer);
             return newPlayer;
         }

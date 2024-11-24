@@ -1,9 +1,8 @@
 package com.citysurvival.restController;
 
-import com.citysurvival.exception.PlayerAlreadyAtLocationException;
-import com.citysurvival.exception.PlayerNotFoundException;
+import com.citysurvival.enums.ExplorationEnum;
+import com.citysurvival.exception.*;
 import com.citysurvival.services.PlayerService;
-import com.citysurvival.exception.PlayerAlreadyExistException;
 import com.citysurvival.models.Player;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +25,7 @@ public class PlayerRestController {
         try {
             Player moovedPlayer = playerController.makePlayerLeaveCity(playerDiscordName);
             return ResponseEntity.ok().body(String.format("Player %s is now at location %s", playerDiscordName, moovedPlayer.getLocation()));
-        } catch (PlayerAlreadyAtLocationException | PlayerNotFoundException exception) {
+        } catch (PlayerAlreadyAtLocationException | PlayerNotFoundException | PlayerHasNotEnoughEnergyException exception) {
             return ResponseEntity.badRequest().body(exception.getMessage());
         }
     }
@@ -37,7 +36,7 @@ public class PlayerRestController {
         try {
             Player moovedPlayer = playerController.makePlayerGoBackToCity(playerDiscordName);
             return ResponseEntity.ok().body(String.format("Player %s is now at location %s", playerDiscordName, moovedPlayer.getLocation()));
-        } catch (PlayerAlreadyAtLocationException | PlayerNotFoundException exception) {
+        } catch (PlayerAlreadyAtLocationException | PlayerNotFoundException | PlayerHasNotEnoughEnergyException exception) {
             return ResponseEntity.badRequest().body(exception.getMessage());
         }
     }
@@ -45,6 +44,26 @@ public class PlayerRestController {
 
     @PostMapping("/explore")
     public ResponseEntity<?> explore(@RequestBody String playerDiscordName) {
+        try {
+            ExplorationEnum eventDone = playerController.explore(playerDiscordName);
+            return ResponseEntity.ok().body(eventDone.getMessage());
+        } catch (PlayerNotFoundException | PlayerHasNotEnoughEnergyException | NoEventTriggeredException exception) {
+            return ResponseEntity.badRequest().body(exception.getMessage());
+        }
+    }
+
+    @PostMapping("/getEnergy")
+    public ResponseEntity<?> getEnergy(@RequestBody String playerDiscordName) {
+        try {
+            String toReturn = playerController.getEnergyForPlayer(playerDiscordName);
+            return ResponseEntity.ok().body(toReturn);
+        } catch (PlayerNotFoundException exception) {
+            return ResponseEntity.badRequest().body(exception.getMessage());
+        }
+    }
+
+    @PostMapping("/drinkWater")
+    public ResponseEntity<?> drinkWater(@RequestBody String playerDiscordName){
         return ResponseEntity.ok().build();
     }
 
