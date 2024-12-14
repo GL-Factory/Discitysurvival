@@ -27,6 +27,9 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
+    - name: Install Dependencies
+      run: npm install
+      working-directory: discordBot
     - run: npm run build --if-present
       working-directory: discordBot
     - run: npm test
