@@ -1,11 +1,9 @@
 package com.citysurvival.services;
 
+import com.citysurvival.configProperty.PlayerConfigProperty;
 import com.citysurvival.daos.PlayerRepository;
 import com.citysurvival.enums.ExplorationEnum;
-import com.citysurvival.exception.NoEventTriggeredException;
-import com.citysurvival.exception.PlayerAlreadyAtLocationException;
-import com.citysurvival.exception.PlayerHasNotEnoughEnergyException;
-import com.citysurvival.exception.PlayerNotFoundException;
+import com.citysurvival.exception.*;
 import com.citysurvival.models.Inventory;
 import com.citysurvival.models.Player;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +24,8 @@ public class PlayerService {
 
     private static final Random random = new Random();
     private static final ExplorationEnum[] events = ExplorationEnum.values();
+    @Autowired
+    private PlayerConfigProperty playerConfigProperty;
 
     public Player makePlayerLeaveCity(String discordName) {
         return switchLocation(discordName, Locations.OUT_OF_TOWN);
@@ -144,9 +144,11 @@ public class PlayerService {
         if (foundPlayer != null) {
             Inventory foundPlayerInventory = foundPlayer.getInventory();
             if(foundPlayerInventory.getWater() > 0) {
-
+                foundPlayer.setCurrentEnergy(playerConfigProperty.getBaseEnergy());
+                foundPlayer.setHasDrink(true);
+                playerRepository.save(foundPlayer);
             } else {
-
+                throw new PlayerHasNoWaterException(discordName);
             }
             return foundPlayer;
         } else {

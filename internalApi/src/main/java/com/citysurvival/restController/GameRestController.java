@@ -19,4 +19,6 @@ public class GameRestController {
         worldController.initNewWorld();
         return ResponseEntity.ok().build();
     }
+
+
 }

@@ -17,6 +17,8 @@ public class PlayerRestController {
 
     @Autowired
     private PlayerService playerController;
+    @Autowired
+    private PlayerService playerService;
 
 
     @PostMapping("/leaveCity")
@@ -64,7 +66,12 @@ public class PlayerRestController {
 
     @PostMapping("/drinkWater")
     public ResponseEntity<?> drinkWater(@RequestBody String playerDiscordName){
-        return ResponseEntity.ok().build();
+        try {
+            Player player = playerService.drinkWater(playerDiscordName);
+            return ResponseEntity.ok().body(String.format("Player %s has now  %d energy and has drunk water", playerDiscordName, player.getCurrentEnergy()));
+        } catch (PlayerNotFoundException | PlayerHasNoWaterException exception) {
+            return ResponseEntity.badRequest().body(exception.getMessage());
+        }
     }
 
 }

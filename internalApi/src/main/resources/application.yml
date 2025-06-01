@@ -20,3 +20,11 @@ spring:
 
 player:
   baseEnergy: 10
+
+jwt:
+  secret: ma_clé_ultra_secrète
+
+app:
+  init-admin:
+    username: admin
+    password: changeme
